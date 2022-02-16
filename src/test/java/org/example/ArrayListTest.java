@@ -72,4 +72,36 @@ public class ArrayListTest extends TestCase {
 
     public void testSet() {
     }
+
+    private void printArr(ArrayList arr){
+        for (int i = 0; i < arr.getSize(); i++){
+            System.out.print(arr.get(i)+" | ");
+        }
+    }
+
+    public void testQuickSort() {
+        test.add(1);
+        test.add(9);
+        test.add(2);
+        test.add(5);
+        test.add(2);
+        test.add(7);
+        test.add(5);
+        test.add(10);
+        test.add(3);
+        test.add(15);
+        test.add(4);
+        test.add(6);
+        test.add(8);
+        printArr(test);
+        Integer[] integers = {1, 19, 4, 6, 2, 7, 8, 3, 5};
+        test.quickSort(integers, 0, 10);
+        System.out.println(integers);
+       // test.quickSort(test, 0, test.getSize()-1);
+        printArr(test);
+    }
+
+    public void testSort() {
+        test.sort();
+    }
 }
