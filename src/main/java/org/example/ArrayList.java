@@ -75,15 +75,11 @@ public class ArrayList<T extends Comparable<T>> {
 
 
     public void sort(){
-        Integer[] integers = {1, 9, 4, 6, 2, 7, 8, 3, 5};
-        quickSort(integers, 0, integers.length - 1);
-        for (int i = 0; i < integers.length; i++){
-            System.out.print(integers[i]+" | ");
-        }
+        quickSort(this, 0, this.getSize() - 1);
     }
 
-    public  <T extends Comparable<T>> void quickSort(T[] array, int wall, int high) {
-        if (array.length == 0)
+    private <T extends Comparable<T>> void quickSort(ArrayList<T> array, int wall, int high) {
+        if (array.getSize() == 0)
             return;//end if length == 0
 
         if (wall >= high)
@@ -91,29 +87,28 @@ public class ArrayList<T extends Comparable<T>> {
 
         // select Pivot
         int middle = wall + (high - wall) / 2;
-        T pivot =  array[middle];
+        T pivot =  array.get(middle);
 
-        // разделить на подмассивы, который больше и меньше опорного элемента
+        // divide into 2 parts: more than pivot or less
         int i = wall, j = high;
         while (i <= j) {
-            while (array[i].compareTo(pivot) < 0) {
+            while (array.get(i).compareTo(pivot) < 0) {
                 i++;
             }
 
-            while (array[j].compareTo(pivot) > 0) {
+            while (array.get(j).compareTo(pivot) > 0) {
                 j--;
             }
 
-            if (i <= j) {//меняем местами
-                T temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-                i++;
-                j--;
+            if (i <= j) {//swap
+                T temp = array.get(i);
+                array.set(i, array.get(j));
+                array.set(j, temp);
+                i++; j--;
             }
         }
 
-        // вызов рекурсии для сортировки левой и правой части
+        // sort left and right parts with recursion
         if (wall < j)
             quickSort(array, wall, j);
 
