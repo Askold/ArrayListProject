@@ -1,5 +1,10 @@
 package org.example.interfaces;
 
+/**
+ * Interface for own ArrayList class
+ *
+ * @author Silonov Kirill
+ */
 public interface MyList<T> {
 
     int getSize();
