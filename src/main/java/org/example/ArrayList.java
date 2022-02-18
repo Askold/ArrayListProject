@@ -94,7 +94,7 @@ public class ArrayList<T extends Comparable<T>> implements MyList<T> {
      */
     @Override
     public T get(int id){
-        if (id < MIN_SIZE || id > MAX_SIZE)
+        if (id < MIN_SIZE || id > size)
             throw new SizeArrayException(Constants.INCORRECT_SIZE);
         return (T) elementData[id];
     }

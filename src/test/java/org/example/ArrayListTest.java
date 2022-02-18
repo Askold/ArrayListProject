@@ -2,75 +2,110 @@ package org.example;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Before;
 
 public class ArrayListTest extends TestCase {
 
     private final ArrayList test = new ArrayList();
+    private final String elem1 = "Hello";
+    private final String elem2 = "World";
+    private final String elemExtra= "Fckn";
+    private final String[] arr = {"Elem", "Elem1", "Elem2", "Elem3"};
 
     public void testGetSize() {
-        System.out.println(test.getSize());
+       Assert.assertEquals(test.getSize(), 0);
+        test.add(elem1);
+        Assert.assertEquals(test.getSize(), 1);
+        test.add(elem2);
+        Assert.assertEquals(test.getSize(), 2);
     }
 
     public void testAdd() {
-        test.clear();
-        test.add("Hello");
-        System.out.println(test.getSize());
+        //Given
+        int[] numArr = {1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8, 1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8};
+        //When
+        for (int i =0; i < numArr.length; i++){
+            test.add(numArr[i]);
+        }
+        //Then
+        Assert.assertEquals(numArr.length, test.getSize());
     }
 
+
     public void testTestAdd() {
-        test.add("Hello");
-        test.add("World");
-        System.out.println(test.getSize());
-        System.out.println(test.get(0));
-        System.out.println(test.get(1));
+        //Given
+        test.add(elem1);
+        test.add(elem2);
+        Assert.assertEquals(2, test.getSize());
+        //When
         test.add(1, "Fckn");
-        System.out.println(test.getSize());
-        System.out.println(test.get(0));
-        System.out.println(test.get(1));
-        System.out.println(test.get(2));
+        //Then
+        Assert.assertEquals(test.getSize(), 3);
+        Assert.assertEquals(test.get(1), "Fckn");
+        Assert.assertEquals(test.get(2), "World");
     }
 
     public void testGet() {
-        test.add("Hello");
-        System.out.println(test.get(0));
+        //Given
+        test.add(elem1);
+        //When
+        String elem = (String) test.get(0);
+        //Then
+        Assert.assertEquals(elem1, elem);
     }
 
     public void testRemove() {
-        test.add("Hello");
-        test.add("World");
-        test.add("Elem");
-        test.add("Elem1");
-        test.add("Elem2");
-        test.add("Elem3");
-        System.out.println(test.getSize());
-        System.out.println(test.get(3));
-        System.out.println(test.get(4));
+        //Given
+        test.add(elem1);
+        test.add(elem2);
+        for (int i =0; i < arr.length; i++){
+            test.add(arr[i]);
+        }
+        int sizeBefore = test.getSize();
+        String element5 =(String) (test.get(4));
+        //When
         test.remove(3);
-        System.out.println(test.getSize());
-        System.out.println(test.get(3));
-        System.out.println(test.get(4));
+        //Then
+        Assert.assertNotEquals(sizeBefore, test.getSize());
+        Assert.assertEquals(element5, test.get(3));
     }
 
     public void testClear() {
-        test.add("Hello");
-        System.out.println(test.getSize());
+        //Given
+        for (int i =0; i < arr.length; i++){
+            test.add(arr[i]);
+        }
+        int sizeBefore = test.getSize();
+        //When
         test.clear();
-        System.out.println(test.getSize());
+        //Then
+        Assert.assertNotEquals(sizeBefore, test.getSize());
+        Assert.assertEquals(0, test.getSize());
     }
 
     public void testIndexOf() {
-        test.add("Hello");
-        test.add("World");
-        test.add("Elem");
-        test.add("Elem1");
-        test.add("Elem2");
-        test.add("Elem3");
-        System.out.println(test.get(2));
-        test.set(2, "Another value");
-        System.out.println(test.get(2));
+        //Given
+        for (int i =0; i < arr.length; i++){
+            test.add(arr[i]);
+        }
+        String value = "value";
+        test.add(3, value);
+        //When
+        int index = test.indexOf(value);
+        //Then
+        Assert.assertEquals(3, index);
     }
 
     public void testSet() {
+        //Given
+        for (int i =0; i < arr.length; i++){
+            test.add(arr[i]);
+        }
+        String anotherValue = "Another value";
+        //When
+        test.set(2, anotherValue);
+        //Then
+        Assert.assertEquals(test.get(2), anotherValue);
     }
 
     private void printArr(ArrayList arr){
@@ -82,21 +117,16 @@ public class ArrayListTest extends TestCase {
 
 
     public void testSort() {
-        test.add(1);
-        test.add(9);
-        test.add(2);
-        test.add(5);
-        test.add(2);
-        test.add(7);
-        test.add(5);
-        test.add(10);
-        test.add(3);
-        test.add(15);
-        test.add(4);
-        test.add(6);
-        test.add(8);
-        printArr(test);
+        //Given
+        int[] numArr = {1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8,};
+        for (int i =0; i < numArr.length; i++){
+            test.add(numArr[i]);
+        }
+        //When
         test.sort();
-        printArr(test);
+        //Then
+        for (int i = 0; i < test.getSize()-1; i++){
+            Assert.assertTrue((int) test.get(i) < (int) test.get(i+1));
+        }
     }
 }
