@@ -13,7 +13,7 @@ public class ArrayListTest extends TestCase {
     private final String[] arr = {"Elem", "Elem1", "Elem2", "Elem3"};
 
     public void testGetSize() {
-       Assert.assertEquals(test.getSize(), 0);
+        Assert.assertEquals(test.getSize(), 0);
         test.add(elem1);
         Assert.assertEquals(test.getSize(), 1);
         test.add(elem2);
@@ -21,41 +21,41 @@ public class ArrayListTest extends TestCase {
     }
 
     public void testAdd() {
-        //Given
+        //Given: Array with more than 10 elements
         int[] numArr = {1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8, 1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8};
-        //When
+        //When: Testing add method
         for (int i =0; i < numArr.length; i++){
             test.add(numArr[i]);
         }
-        //Then
+        //Then: Length of default array and our ArrayList should be equal
         Assert.assertEquals(numArr.length, test.getSize());
     }
 
 
     public void testTestAdd() {
-        //Given
+        //Given: Filling array
         test.add(elem1);
         test.add(elem2);
         Assert.assertEquals(2, test.getSize());
-        //When
-        test.add(1, "Fckn");
-        //Then
+        //When: Adding new element into body
+        test.add(1, elemExtra);
+        //Then: Elements after new one should move
         Assert.assertEquals(test.getSize(), 3);
-        Assert.assertEquals(test.get(1), "Fckn");
-        Assert.assertEquals(test.get(2), "World");
+        Assert.assertEquals(test.get(1), elemExtra);
+        Assert.assertEquals(test.get(2), elemExtra);
     }
 
     public void testGet() {
-        //Given
+        //Given: Filling array
         test.add(elem1);
-        //When
+        //When: Getting element by id
         String elem = (String) test.get(0);
-        //Then
+        //Then: Inputted and received elements should be equal
         Assert.assertEquals(elem1, elem);
     }
 
     public void testRemove() {
-        //Given
+        //Given: Filling array, saving element next from one that used to be removed and size
         test.add(elem1);
         test.add(elem2);
         for (int i =0; i < arr.length; i++){
@@ -63,48 +63,48 @@ public class ArrayListTest extends TestCase {
         }
         int sizeBefore = test.getSize();
         String element5 =(String) (test.get(4));
-        //When
+        //When: Trying to remove element by id
         test.remove(3);
-        //Then
+        //Then: Saved and received elements should be equal, sizes should not be equal
         Assert.assertNotEquals(sizeBefore, test.getSize());
         Assert.assertEquals(element5, test.get(3));
     }
 
     public void testClear() {
-        //Given
+        //Given: Filling array and saving size
         for (int i =0; i < arr.length; i++){
             test.add(arr[i]);
         }
         int sizeBefore = test.getSize();
-        //When
+        //When: Trying to clear an array
         test.clear();
-        //Then
+        //Then: Size should be equal zero
         Assert.assertNotEquals(sizeBefore, test.getSize());
         Assert.assertEquals(0, test.getSize());
     }
 
     public void testIndexOf() {
-        //Given
+        //Given: Filling array and setting the value which we are looking for
         for (int i =0; i < arr.length; i++){
             test.add(arr[i]);
         }
         String value = "value";
         test.add(3, value);
-        //When
+        //When: Searching by value
         int index = test.indexOf(value);
-        //Then
+        //Then: Indexes of transferred element and received one should be equal
         Assert.assertEquals(3, index);
     }
 
     public void testSet() {
-        //Given
+        //Given: Filling array and saving new value of element
         for (int i =0; i < arr.length; i++){
             test.add(arr[i]);
         }
         String anotherValue = "Another value";
-        //When
+        //When: Changing value by id
         test.set(2, anotherValue);
-        //Then
+        //Then: Saved and new values should be equal
         Assert.assertEquals(test.get(2), anotherValue);
     }
 
@@ -117,14 +117,14 @@ public class ArrayListTest extends TestCase {
 
 
     public void testSort() {
-        //Given
+        //Given: Filling array
         int[] numArr = {1, 9, 2, 5, 2, 7, 5, 17, 3, 15, 4, 6, 8,};
         for (int i =0; i < numArr.length; i++){
             test.add(numArr[i]);
         }
-        //When
+        //When: Sorting ArrayList with our quickSort() method
         test.sort();
-        //Then
+        //Then: Each element should be smaller than next
         for (int i = 0; i < test.getSize()-1; i++){
             Assert.assertTrue((int) test.get(i) < (int) test.get(i+1));
         }
