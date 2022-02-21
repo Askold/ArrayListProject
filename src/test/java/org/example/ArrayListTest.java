@@ -9,7 +9,7 @@ public class ArrayListTest extends TestCase {
     private final ArrayList test = new ArrayList();
     private final String elem1 = "Hello";
     private final String elem2 = "World";
-    private final String elemExtra= "Fckn";
+    private final String elemExtra= "Fckn1";
     private final String[] arr = {"Elem", "Elem1", "Elem2", "Elem3"};
 
     public void testGetSize() {
