@@ -36,13 +36,12 @@ public class ArrayListTest extends TestCase {
         //Given: Filling array
         test.add(elem1);
         test.add(elem2);
-        Assert.assertEquals(2, test.getSize());
         //When: Adding new element into body
         test.add(1, elemExtra);
         //Then: Elements after new one should move
         Assert.assertEquals(test.getSize(), 3);
         Assert.assertEquals(test.get(1), elemExtra);
-        Assert.assertEquals(test.get(2), elemExtra);
+        Assert.assertEquals(test.get(2), elem2);
     }
 
     public void testGet() {
@@ -124,9 +123,10 @@ public class ArrayListTest extends TestCase {
         }
         //When: Sorting ArrayList with our quickSort() method
         test.sort();
+        printArr(test);
         //Then: Each element should be smaller than next
         for (int i = 0; i < test.getSize()-1; i++){
-            Assert.assertTrue((int) test.get(i) < (int) test.get(i+1));
+            Assert.assertTrue((int) test.get(i) <= (int) test.get(i+1));
         }
     }
 }
